@@ -34,6 +34,33 @@ namespace LoggingKata
             // Now that your Parse method is completed, START BELOW ----------
 
             // TODO: Create two `ITrackable` variables with initial values of `null`. These will be used to store your two taco bells that are the farthest from each other.
+            ITrackable store1 = null;
+            ITrackable store2 = null;
+            double distance = 0;
+            for(int i = 0; i < locations.Length; i++)
+            {
+                ITrackable LocA = locations[i];
+                GeoCoordinate coordinateA = new GeoCoordinate();
+                coordinateA.Latitude = LocA.Location.Latitude;
+                coordinateA.Longitude = LocA.Location.Longitude;
+                for(int j = 0; j < locations.Length; j++)
+                {
+                    ITrackable LocB = locations[j];
+                    GeoCoordinate coordinateB = new GeoCoordinate();
+                    coordinateB.Latitude = LocB.Location.Latitude;
+                    coordinateB.Longitude = LocB.Location.Longitude;
+                    if(coordinateA.GetDistanceTo(coordinateB) > distance)
+                    {
+                        distance = coordinateA.GetDistanceTo(coordinateB);
+                        store1 = LocA;
+                        store2 = LocB;
+                    }
+                }
+            }
+            Console.WriteLine(store1.Name);
+            Console.WriteLine(store2.Name);
+            Console.WriteLine(distance);
+
             // Create a `double` variable to store the distance
 
             // Include the Geolocation toolbox, so you can compare locations: `using GeoCoordinatePortable;`
